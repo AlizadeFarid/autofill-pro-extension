@@ -11,12 +11,15 @@
       font-size: 13px;
     }
     h3 {
-      margin: 0 0 14px 0; font-size: 14px; font-weight: 600;
+      margin: 0 0 12px 0; font-size: 14px; font-weight: 600;
       letter-spacing: -0.01em; color: #111827;
     }
-    label { font-size: 11px; color: #6b7280; margin-bottom: 6px; display: block; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+    label {
+      font-size: 12px; color: #6b7280; margin-bottom: 6px;
+      display: block; font-weight: 500;
+    }
     select {
-      width: 100%; padding: 8px 10px; margin-bottom: 14px;
+      width: 100%; padding: 8px 10px; margin-bottom: 12px;
       background: #ffffff; color: #111827;
       border: 1px solid #d1d5db; border-radius: 6px;
       font-size: 13px; outline: none;
@@ -24,22 +27,34 @@
     }
     select:focus { border-color: #6b7280; }
     button {
-      width: 100%; padding: 9px 12px; margin-bottom: 6px;
+      padding: 9px 10px;
       border: 1px solid #d1d5db; border-radius: 6px;
       cursor: pointer; font-size: 13px; font-weight: 500;
       background: #ffffff; color: #111827;
       font-family: inherit;
-      transition: background 0.12s, border-color 0.12s;
+      transition: background 0.12s, border-color 0.12s, color 0.12s;
     }
     button:hover { background: #f3f4f6; border-color: #9ca3af; }
-    #pickBtn { background: #111827; color: #ffffff; border-color: #111827; }
+    #pickBtn {
+      width: 100%; margin-bottom: 6px;
+      background: #111827; color: #ffffff; border-color: #111827;
+    }
     #pickBtn:hover { background: #1f2937; border-color: #1f2937; }
+    .btn-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    }
     #clearBtn:hover { background: #fef2f2; border-color: #ef4444; color: #b91c1c; }
-    .toggles { margin: 12px 0 4px; padding: 10px 0; border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6; }
-    .toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer; user-select: none; }
+    .toggles {
+      margin: 14px 0 4px; padding: 12px 0;
+      border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6;
+    }
+    .toggle-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+      cursor: pointer; user-select: none;
+      font-size: 12px; color: #374151; font-weight: 400;
+    }
     .toggle-row:last-child { margin-bottom: 0; }
     .toggle-row input { margin: 0; cursor: pointer; }
-    .toggle-row span { font-size: 12px; color: #374151; }
     .info {
       font-size: 11px; color: #9ca3af; text-align: center;
       margin-top: 10px; padding-top: 10px; border-top: 1px solid #f3f4f6;
@@ -55,11 +70,13 @@
   </select>
 
   <button id="pickBtn">Pick fields from page</button>
-  <button id="openOptions">Open settings</button>
-  <button id="clearBtn">Clear saved fields</button>
+  <div class="btn-grid">
+    <button id="openOptions">Settings</button>
+    <button id="clearBtn">Clear fields</button>
+  </div>
 
   <div class="toggles">
-    <label class="toggle-row"><input type="checkbox" id="autoFillOnLoad"><span>Auto-fill on page load (wizards)</span></label>
+    <label class="toggle-row"><input type="checkbox" id="autoFillOnLoad"><span>Auto-fill on page load</span></label>
     <label class="toggle-row"><input type="checkbox" id="clickButtons"><span>Click buttons during auto-fill</span></label>
   </div>
 

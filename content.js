@@ -72,7 +72,6 @@ style.innerHTML = `
   #qa-autoflow-editor .qa-edit-actions button { padding:5px 10px; border:0; border-radius:5px; cursor:pointer; font:12px system-ui; font-weight:500; }
   #qa-autoflow-editor .qa-edit-save { background:#10b981; color:#fff; flex:1; }
   #qa-autoflow-editor .qa-edit-skip { background:#374151; color:#fff; }
-  #qa-autoflow-editor .qa-edit-hint { color:#9ca3af; font-size:10px; margin-top:6px; line-height:1.3; }
   #qa-autoflow-overlay {
     position: fixed; inset: 0; pointer-events: none; z-index: 2147483640;
     box-shadow: inset 0 0 0 5px #10b981;
@@ -347,7 +346,6 @@ function openInlineEditor(target, selector, suggestedValue, onSave) {
       <button class="qa-edit-save" type="button">Save · Enter</button>
       <button class="qa-edit-skip" type="button">Skip · Esc</button>
     </div>
-    <div class="qa-edit-hint">Tokens: {{RANDOM_EMAIL}} · {{RANDOM_NUM}} · {{TODAY}}</div>
   `;
   card.querySelector('.qa-edit-sel').textContent = selector;
   const input = card.querySelector('.qa-edit-input');
