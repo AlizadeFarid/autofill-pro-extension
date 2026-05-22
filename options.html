@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AutoFill Pro — Settings</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #fafafa;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #111827;
+      --danger: #b91c1c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      display: flex; font-size: 13px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px; background: var(--panel);
+      border-right: 1px solid var(--border);
+      padding: 22px 18px; display: flex; flex-direction: column;
+    }
+    .sidebar h2 {
+      font-size: 12px; margin: 0 0 16px 0; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .profile-list { flex-grow: 1; overflow-y: auto; }
+    .profile-item {
+      padding: 10px 12px; margin-bottom: 4px;
+      border-radius: 6px; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1px solid transparent;
+      transition: background 0.12s;
+    }
+    .profile-item:hover { background: #f3f4f6; }
+    .profile-item.active { background: #ffffff; border-color: var(--border); }
+    .delete-profile {
+      color: var(--muted); background: none; border: none;
+      cursor: pointer; font-size: 16px; padding: 0 4px; line-height: 1;
+    }
+    .delete-profile:hover { color: var(--danger); }
+    .profile-meta { font-size: 11px; color: var(--muted); margin-left: 8px; }
+
+    .add-profile-btn {
+      width: 100%; padding: 9px; border-radius: 6px;
+      background: var(--accent); color: #ffffff; border: 1px solid var(--accent);
+      cursor: pointer; font-weight: 500; margin-top: 10px;
+      font-size: 13px; font-family: inherit;
+    }
+    .add-profile-btn:hover { background: #1f2937; }
+
+    .io-row { display: flex; gap: 6px; margin-top: 6px; }
+    .io-btn {
+      flex: 1; padding: 8px; background: #ffffff;
+      color: var(--text); border: 1px solid var(--border);
+      border-radius: 6px; cursor: pointer; font-size: 12px;
+      font-family: inherit;
+    }
+    .io-btn:hover { background: #f3f4f6; }
+
+    /* Main */
+    .main-content { flex-grow: 1; padding: 30px 36px; overflow-y: auto; background: var(--bg); }
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .header h1 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+
+    .save-btn {
+      background: var(--accent); color: #ffffff;
+      border: 1px solid var(--accent);
+      padding: 8px 16px; border-radius: 6px;
+      cursor: pointer; font-weight: 500; font-size: 13px;
+      font-family: inherit;
+    }
+    .save-btn:hover { background: #1f2937; }
+
+    .url-pattern-row {
+      display: flex; gap: 10px; align-items: center;
+      margin-bottom: 18px;
+      background: var(--panel); padding: 10px 14px;
+      border-radius: 6px; border: 1px solid var(--border);
+    }
+    .url-pattern-row label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .url-pattern-row input {
+      background: #ffffff; border: 1px solid var(--border);
+      color: var(--text); padding: 7px 10px; border-radius: 5px;
+      font-size: 13px; flex: 1; outline: none; font-family: inherit;
+    }
+    .url-pattern-row input:focus { border-color: var(--muted); }
+
+    .field-row {
+      display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-end;
+      background: var(--panel); padding: 12px 14px;
+      border-radius: 6px; border: 1px solid var(--border);
+    }
+    .field-group { display: flex; flex-direction: column; flex-grow: 1; }
+    .field-group label {
+      font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    input[type="text"] {
+      background: #ffffff; border: 1px solid var(--border);
+      color: var(--text); padding: 8px 10px; border-radius: 5px;
+      font-size: 13px; width: 100%; outline: none; font-family: inherit;
+    }
+    input[type="text"]:focus { border-color: var(--muted); }
+
+    .remove-field {
+      background: #ffffff; color: var(--muted);
+      border: 1px solid var(--border); padding: 7px 12px;
+      border-radius: 5px; cursor: pointer; font-size: 12px;
+      font-family: inherit;
+    }
+    .remove-field:hover { color: var(--danger); border-color: var(--danger); background: #fef2f2; }
+
+    .add-field-btn {
+      background: transparent; border: 1px dashed var(--border);
+      color: var(--muted); padding: 12px; width: 100%;
+      border-radius: 6px; cursor: pointer; font-weight: 500;
+      margin-top: 8px; font-size: 13px; font-family: inherit;
+    }
+    .add-field-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    #emptyState { text-align: center; color: var(--muted); margin-top: 120px; font-size: 14px; }
+
+    .section-header {
+      margin: 22px 0 8px;
+      padding: 10px 14px;
+      background: #f3f4f6;
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+    }
+    .section-header:first-child { margin-top: 0; }
+    .section-title {
+      font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.005em;
+    }
+    .section-key {
+      font-size: 11px; color: var(--muted); margin-top: 2px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all;
+    }
+    .section-fields {
+      border: 1px solid var(--border); border-radius: 6px; padding: 10px;
+      background: #fff;
+    }
+    .section-fields .field-row { margin-bottom: 8px; }
+    .section-fields .field-row:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Profiles</h2>
+    <div class="profile-list" id="profileList"></div>
+    <button class="add-profile-btn" id="addProfileBtn">New profile</button>
+    <div class="io-row">
+      <button class="io-btn" id="exportBtn">Export</button>
+      <button class="io-btn" id="importBtn">Import</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div id="emptyState">Select a profile or create a new one.</div>
+
+    <div id="editorPanel" style="display: none;">
+      <div class="header">
+        <h1 id="currentProfileName">Profile</h1>
+        <button class="save-btn" id="saveBtn">Save</button>
+      </div>
+
+      <div class="url-pattern-row">
+        <label>URL pattern</label>
+        <input type="text" id="urlPatternInput" placeholder="e.g. *demoqa.com*  —  auto-selects this profile">
+      </div>
+
+      <div id="fieldsContainer"></div>
+
+      <button class="add-field-btn" id="addFieldBtn">Add field</button>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      width: 260px; padding: 16px; margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #ffffff; color: #111827;
+      font-size: 13px;
+    }
+    h3 {
+      margin: 0 0 14px 0; font-size: 14px; font-weight: 600;
+      letter-spacing: -0.01em; color: #111827;
+    }
+    label { font-size: 11px; color: #6b7280; margin-bottom: 6px; display: block; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+    select {
+      width: 100%; padding: 8px 10px; margin-bottom: 14px;
+      background: #ffffff; color: #111827;
+      border: 1px solid #d1d5db; border-radius: 6px;
+      font-size: 13px; outline: none;
+      font-family: inherit;
+    }
+    select:focus { border-color: #6b7280; }
+    button {
+      width: 100%; padding: 9px 12px; margin-bottom: 6px;
+      border: 1px solid #d1d5db; border-radius: 6px;
+      cursor: pointer; font-size: 13px; font-weight: 500;
+      background: #ffffff; color: #111827;
+      font-family: inherit;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    button:hover { background: #f3f4f6; border-color: #9ca3af; }
+    #pickBtn { background: #111827; color: #ffffff; border-color: #111827; }
+    #pickBtn:hover { background: #1f2937; border-color: #1f2937; }
+    #clearBtn:hover { background: #fef2f2; border-color: #ef4444; color: #b91c1c; }
+    .toggles { margin: 12px 0 4px; padding: 10px 0; border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6; }
+    .toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer; user-select: none; }
+    .toggle-row:last-child { margin-bottom: 0; }
+    .toggle-row input { margin: 0; cursor: pointer; }
+    .toggle-row span { font-size: 12px; color: #374151; }
+    .info {
+      font-size: 11px; color: #9ca3af; text-align: center;
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+  <h3>AutoFill Pro</h3>
+
+  <label>Active profile</label>
+  <select id="profileSelect">
+    <option value="">Loading…</option>
+  </select>
+
+  <button id="pickBtn">Pick fields from page</button>
+  <button id="openOptions">Open settings</button>
+  <button id="clearBtn">Clear saved fields</button>
+
+  <div class="toggles">
+    <label class="toggle-row"><input type="checkbox" id="autoFillOnLoad"><span>Auto-fill on page load (wizards)</span></label>
+    <label class="toggle-row"><input type="checkbox" id="clickButtons"><span>Click buttons during auto-fill</span></label>
+  </div>
+
+  <div class="info">Alt+P — picker &nbsp;·&nbsp; Alt+F — auto-fill &nbsp;·&nbsp; Ctrl/Cmd+Z — undo</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
